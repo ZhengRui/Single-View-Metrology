@@ -77,6 +77,7 @@ protected:
 private:
     bool _pan, _hasimage, _xVP_exist, _yVP_exist, _zVP_exist, _refHomo_exist, _getGammaZ;
     int _panStartX, _panStartY, _extraRPt, _method, _textureMethod;
+    double gap;
     stateSign state;
 
     std::vector<imgLine> XLines, YLines, ZLines;

@@ -149,6 +149,21 @@ void SVMGraphicsView::mouseMoveEvent(QMouseEvent *event)
             }
         }
 //        cout << imgCursorPos.x() << ", " << imgCursorPos.y() << endl;
+
+        if(_zVP_exist && (state == _RHeight || state == _PtPool) && imgPix.x() >=0 && imgPix.x() < image.size().width() && imgPix.y() >=0 && imgPix.y() < image.size().height())
+        {
+            if(pointCache == NULL)
+                drawScene();
+
+            double endx = zVP->x + (1-gap) * (imgCursorPos.x() - zVP->x);
+            double endy = zVP->y + (1-gap) * (imgCursorPos.y() - zVP->y);
+            Scene->addLine(zVP->x, zVP->y, endx, endy, QPen(Qt::white, 0.5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+            endx = zVP->x + (1+gap) * (imgCursorPos.x() - zVP->x);
+            endy = zVP->y + (1+gap) * (imgCursorPos.y() - zVP->y);
+            double endx2 = zVP->x + 1.1 * (imgCursorPos.x() - zVP->x);
+            double endy2 = zVP->y + 1.1 * (imgCursorPos.y() - zVP->y);
+            Scene->addLine(endx, endy, endx2, endy2, QPen(Qt::white, 0.5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        }
     }
     event->ignore();
 }
@@ -176,6 +191,7 @@ void SVMGraphicsView::svmInit()
     _getGammaZ = false;
     _method = 0;
     _textureMethod = 0;
+    gap = 0.005;
     refHomoI2S << 0,0,0,
                   0,0,0,
                   0,0,0;
@@ -626,8 +642,11 @@ void SVMGraphicsView::keyPressEvent(QKeyEvent *event)
                         }
                         break;
                     case _Polygon:
-                        PolyPool.pop_back();
-                        drawScene();
+                        if(PolyPool.size())
+                        {
+                            PolyPool.pop_back();
+                            drawScene();
+                        }
                         break;
                     default:
                         break;
@@ -651,6 +670,14 @@ void SVMGraphicsView::keyPressEvent(QKeyEvent *event)
             {
                 calPatch();
             }
+        }
+        if (event->key() == Qt::Key_Equal)
+        {
+            gap *= 1.1;
+        }
+        if (event->key() == Qt::Key_Minus)
+        {
+            gap /= 1.1;
         }
     }
 }
@@ -1580,12 +1607,12 @@ void SVMGraphicsView::make3DPtPool()
     {
         if (_getGammaZ)
         {
-        drawScene();
-        cout << "\n Please pick up all the points which will be used to form polygons later, start from one point in the reference plane. \n"
-             << "You can change method state afterwards. Begin with co-plane methods. \"Alt + S\" could switch between co-plane and vertical methods." << endl;
-        state = _PtPool;
-        poolCache = NULL;
-        _method = 0;
+            state = _PtPool;
+            drawScene();
+            cout << "\n Please pick up all the points which will be used to form polygons later, start from one point in the reference plane. \n"
+                 << "You can change method state afterwards. Begin with co-plane methods. \"Alt + S\" could switch between co-plane and vertical methods." << endl;
+            poolCache = NULL;
+            _method = 0;
         } else {
             QMessageBox::warning(this, tr("Warning"), tr("Please calculate all the staffs first!"));
         }
@@ -1722,10 +1749,10 @@ void SVMGraphicsView::calPatch()
     {
         if (PolyPool.size() >= 3)
         {
-            if (planeCheck(PolyPool))
-            {
+//            if (planeCheck(PolyPool))
+//            {
                 makePatch();
-            }
+//            }
         } else {
             QMessageBox::warning(this, tr("Warning"), tr("To make patch, please calculate Alpha, pick up at least 3 points on a plane first !"));
         }
@@ -1889,7 +1916,7 @@ void SVMGraphicsView::makePatch()
             {
                 if (region.containsPoint(QPointF(rotatedX, rotatedY), Qt::OddEvenFill))
                 {
-                    Vector3d trueCord = rotate(rotatedX, rotatedY, sign * x(3) / sqrt(x(0) * x(0) + x(1) * x(1) + x(2) * x(2)), R, -theta);
+                    Vector3d trueCord = rotate(rotatedX, rotatedY, sign * abs(x(3)) / sqrt(x(0) * x(0) + x(1) * x(1) + x(2) * x(2)), R, -theta);
                     Vector4d scnCord;
                     scnCord(0) = trueCord(0);
                     scnCord(1) = trueCord(1);
