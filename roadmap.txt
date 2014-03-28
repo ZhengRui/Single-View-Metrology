@@ -1,0 +1,10 @@
+To calculate homography matrix:
+
+  Only need specify four image points to get the vx and vy,
+  then specify two imagepoints and their corresponding scene points coordinates,
+  these two points should have different x value and y value, then we can find the origin position in the image.
+  With origin position know, using anyother scene point which has non-zero x and y value, we can get the whole affine transformation
+  in both direction, thus the homography matrix. Why two scene points' coordinate is enough, because we can actually construct 2 other
+  scene points (in total 4 scene point's coordinates will be known) if we already has vx and vy, thus determine the affine transformation
+  totally.
+

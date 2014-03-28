@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionXLines"/>
+    <addaction name="actionYLines"/>
+    <addaction name="actionZLines"/>
+    <addaction name="actionRPlane"/>
+    <addaction name="actionRHeight"/>
+    <addaction name="actionPtPool"/>
+    <addaction name="actionPolygon"/>
+    <addaction name="separator"/>
+    <addaction name="actionRescale"/>
+    <addaction name="actionReset"/>
+   </widget>
+   <widget class="QMenu" name="menuCalculation">
+    <property name="title">
+     <string>Calculation</string>
+    </property>
+    <addaction name="actionXVPoint"/>
+    <addaction name="actionYVPoint"/>
+    <addaction name="actionZVPoint"/>
+    <addaction name="actionHomography"/>
+    <addaction name="actionAlpha"/>
+    <addaction name="actionTexture"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="actionScene2Image"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuCalculation"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionXLines">
+   <property name="text">
+    <string>XLines</string>
+   </property>
+  </action>
+  <action name="actionYLines">
+   <property name="text">
+    <string>YLines</string>
+   </property>
+  </action>
+  <action name="actionZLines">
+   <property name="text">
+    <string>ZLines</string>
+   </property>
+  </action>
+  <action name="actionRPlane">
+   <property name="text">
+    <string>RPlane</string>
+   </property>
+  </action>
+  <action name="actionRHeight">
+   <property name="text">
+    <string>RHeight</string>
+   </property>
+  </action>
+  <action name="actionPolygon">
+   <property name="text">
+    <string>Polygon</string>
+   </property>
+  </action>
+  <action name="actionRescale">
+   <property name="text">
+    <string>Rescale</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="text">
+    <string>Reset</string>
+   </property>
+  </action>
+  <action name="actionXVPoint">
+   <property name="text">
+    <string>XVPoint</string>
+   </property>
+  </action>
+  <action name="actionYVPoint">
+   <property name="text">
+    <string>YVPoint</string>
+   </property>
+  </action>
+  <action name="actionZVPoint">
+   <property name="text">
+    <string>ZVPoint</string>
+   </property>
+  </action>
+  <action name="actionHomography">
+   <property name="text">
+    <string>Homography</string>
+   </property>
+  </action>
+  <action name="actionAlpha">
+   <property name="text">
+    <string>Alpha</string>
+   </property>
+  </action>
+  <action name="actionTexture">
+   <property name="text">
+    <string>Texture</string>
+   </property>
+  </action>
+  <action name="actionScene2Image">
+   <property name="text">
+    <string>Scene2Image</string>
+   </property>
+  </action>
+  <action name="actionPtPool">
+   <property name="text">
+    <string>PtPool</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
